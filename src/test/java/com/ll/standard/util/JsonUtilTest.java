@@ -120,4 +120,113 @@ public class JsonUtilTest {
                 }
                 """.stripIndent().trim());
     }
+
+    @Test
+    @DisplayName("JSON to Map(필드 1개)")
+    public void t6() {
+        // given
+        String jsonStr = """
+                {
+                    "name": "이름",
+                }
+                """.stripIndent().trim();
+
+        // when
+        Map<String, Object> map = Util.json.toMap(jsonStr);
+
+        // then
+        assertThat(map).containsEntry("name", "이름");
+    }
+
+    @Test
+    @DisplayName("JSON to Map(필드 2개)")
+    public void t7() {
+        // given
+        String jsonStr = """
+                {
+                    "name": "이름",
+                    "gender": "남자"
+                }
+                """.stripIndent().trim();
+
+        // when
+        Map<String, Object> map = Util.json.toMap(jsonStr);
+
+        // then
+        assertThat(map)
+                .containsEntry("name", "이름")
+                .containsEntry("gender", "남자");
+    }
+
+    @Test
+    @DisplayName("JSON to Map(숫자필드(정수))")
+    public void t8() {
+        // given
+        String jsonStr = """
+                {
+                    "id": 1,
+                    "name": "이름",
+                    "gender": "남자"
+                }
+                """.stripIndent().trim();
+
+        // when
+        Map<String, Object> map = Util.json.toMap(jsonStr);
+
+        // then
+        assertThat(map)
+                .containsEntry("id", 1)
+                .containsEntry("name", "이름")
+                .containsEntry("gender", "남자");
+    }
+
+    @Test
+    @DisplayName("JSON to Map(숫자필드(실수))")
+    public void t9() {
+        // given
+        String jsonStr = """
+                {
+                    "id": 1,
+                    "name": "이름",
+                    "gender": "남자",
+                    "height": 178.1543221
+                }
+                """.stripIndent().trim();
+
+        // when
+        Map<String, Object> map = Util.json.toMap(jsonStr);
+
+        // then
+        assertThat(map)
+                .containsEntry("id", 1)
+                .containsEntry("name", "이름")
+                .containsEntry("gender", "남자")
+                .containsEntry("height", 178.1543221);
+    }
+
+    @Test
+    @DisplayName("JSON to Map(논리필드)")
+    public void t10() {
+        // given
+        String jsonStr = """
+                {
+                    "id": 1,
+                    "name": "이름",
+                    "gender": "남자",
+                    "height": 178.1543221,
+                    "married": false
+                }
+                """.stripIndent().trim();
+
+        // when
+        Map<String, Object> map = Util.json.toMap(jsonStr);
+
+        // then
+        assertThat(map)
+                .containsEntry("id", 1)
+                .containsEntry("name", "이름")
+                .containsEntry("gender", "남자")
+                .containsEntry("height", 178.1543221)
+                .containsEntry("married", false);
+    }
 }
