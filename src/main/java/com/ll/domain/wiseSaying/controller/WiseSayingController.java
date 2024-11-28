@@ -1,6 +1,6 @@
 package com.ll.domain.wiseSaying.controller;
 
-import com.ll.Command;
+import com.ll.global.app.Command;
 import com.ll.domain.wiseSaying.entity.WiseSaying;
 import com.ll.domain.wiseSaying.service.WiseSayingService;
 
@@ -18,9 +18,9 @@ public class WiseSayingController {
     }
 
     public void actionAdd() {
-        System.out.println("명언 : ");
+        System.out.print("명언 : ");
         String content = scanner.nextLine();
-        System.out.println("작가 : ");
+        System.out.print("작가 : ");
         String author = scanner.nextLine();
 
         WiseSaying wiseSaying = wiseSayingService.add(content, author);
@@ -74,9 +74,11 @@ public class WiseSayingController {
 
         WiseSaying wiseSaying = opWiseSaying.get();
         System.out.println("명언(기존) : " + wiseSaying.getContent());
+        System.out.print("명언 : ");
         String content = scanner.nextLine();
 
         System.out.println("작가(기존) : " + wiseSaying.getAuthor());
+        System.out.print("작가 : ");
         String author = scanner.nextLine();
 
         wiseSayingService.modify(wiseSaying, content, author);
